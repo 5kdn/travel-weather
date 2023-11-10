@@ -1,0 +1,35 @@
+env:
+  browser: true
+  es2021: true
+extends:
+  - airbnb-base
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:vue/vue3-essential
+  - prettier
+parserOptions:
+  ecmaVersion: latest
+  parser: '@typescript-eslint/parser'
+plugins:
+  - '@typescript-eslint'
+  - vue
+settings:
+  import/resolver:
+    typescript:
+      project: src/
+    node:
+      extensions:
+        .js
+        .jsx
+        .ts
+        .tsx
+        .d.ts
+ignorePatterns:
+  'src/__test__/*'
+rules:
+  max-len: [error, {ignoreComments: true}]
+  semi: off
+  import/prefer-default-export: off
+  import/extensions: ['error', 'ignorePackages', {js: never, ts: never}]
+  import/no-extraneous-dependencies: [error, {devDependencies: ['**/*.test.ts', '**/*.stories.ts']}]
+  vue/multi-word-component-names: 'off'
