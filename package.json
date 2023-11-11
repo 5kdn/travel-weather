@@ -42,6 +42,7 @@
     "@vitejs/plugin-vue": "^4.4.1",
     "@vitest/coverage-v8": "^0.34.6",
     "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/language-plugin-pug": "^1.8.22",
     "@vue/test-utils": "^2.4.1",
     "eslint": "^8.53.0",
     "eslint-config-airbnb-base": "^15.0.0",
