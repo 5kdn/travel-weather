@@ -6,9 +6,9 @@ import { HourlyWeather } from '@/components/utils/Weather/HourlyWeather'
 
 test('初期値', () => {
   const actual = new HourlyWeather(null, null, null, null)
-  expect(actual.time          ).toBe(null)
-  expect(actual.icon          ).toBe(WeatherIcon.NA)
-  expect(actual.temperture    ).toBe(null)
+  expect(actual.time        ).toBe(null)
+  expect(actual.icon        ).toBe(WeatherIcon.NA)
+  expect(actual.temperture  ).toBe(null)
   expect(actual.chanceOfRain).toBe(null)
 })
 
@@ -18,9 +18,9 @@ test('Time', () => {
   expect(actual).not.toBeNull()
   if(actual === null) return
   expect(actual.getFullYear()).toBe(2000)
-  expect(actual.getMonth()).toBe(2)
-  expect(actual.getDate()).toBe(3)
-  expect(actual.getHours()).toBe(4)
+  expect(actual.getMonth()   ).toBe(2)
+  expect(actual.getDate()    ).toBe(3)
+  expect(actual.getHours()   ).toBe(4)
 })
 
 
