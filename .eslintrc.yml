@@ -27,9 +27,23 @@ settings:
 ignorePatterns:
   'src/__test__/*'
 rules:
-  max-len: [error, {ignoreComments: true}]
+  max-len:
+    - error
+    - ignoreComments: true
   semi: off
+  no-shadow: off
   import/prefer-default-export: off
-  import/extensions: ['error', 'ignorePackages', {js: never, ts: never}]
-  import/no-extraneous-dependencies: [error, {devDependencies: ['**/*.test.ts', '**/*.stories.ts']}]
-  vue/multi-word-component-names: 'off'
+  import/extensions:
+    - error
+    - ignorePackages
+    - {js: never, ts: never}
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies:
+      - /vite.config.ts
+      - /vitest.config.ts
+      - /src/__tests__/**/*.*
+      - '**/*.test.ts'
+      - '**/*.stories.ts'
+  vue/multi-word-component-names: off
+  no-underscore-dangle: off

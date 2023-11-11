@@ -21,6 +21,7 @@
   "dependencies": {
     "@mdi/font": "7.3.67",
     "core-js": "^3.33.2",
+    "destyle.css": "^4.0.0",
     "pinia": "^2.1.7",
     "roboto-fontface": "0.10.0",
     "vue": "^3.3.8",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.23.3",
+    "@iconify-json/wi": "^1.1.5",
     "@storybook/addon-essentials": "7.5.3",
     "@storybook/addon-interactions": "7.5.3",
     "@storybook/addon-links": "7.5.3",
@@ -62,6 +64,7 @@
     "storybook": "7.5.3",
     "typescript": "^5.2.2",
     "unplugin-fonts": "^1.0.3",
+    "unplugin-icons": "^0.17.3",
     "vite": "^4.5.0",
     "vite-plugin-vuetify": "^1.0.2",
     "vitest": "^0.34.6",
