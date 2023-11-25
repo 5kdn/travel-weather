@@ -23,9 +23,9 @@ export default defineConfig({
       autoInstall: true,
       iconCustomizer(collection, icon, props) {
         if (collection === 'wi') {
-          // eslint-disable-next-line no-param-reassign */
+          // eslint-disable-next-line no-param-reassign
           props.width = '100%'
-          // eslint-disable-next-line no-param-reassign */
+          // eslint-disable-next-line no-param-reassign
           props.height = '100%'
         }
       },

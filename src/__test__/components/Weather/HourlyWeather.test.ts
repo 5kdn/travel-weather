@@ -3,12 +3,11 @@ import { describe, expect, test } from 'vitest'
 import { WeatherIcon } from '@/components/utils/Weather/WeatherIcon'
 import { HourlyWeather } from '@/components/utils/Weather/HourlyWeather'
 
-
 test('初期値', () => {
   const actual = new HourlyWeather(null, null, null, null)
-  expect(actual.time        ).toBe(null)
-  expect(actual.icon        ).toBe(WeatherIcon.NA)
-  expect(actual.temperture  ).toBe(null)
+  expect(actual.time).toBe(null)
+  expect(actual.icon).toBe('NA')
+  expect(actual.temperture).toBe(null)
   expect(actual.chanceOfRain).toBe(null)
 })
 
@@ -16,89 +15,75 @@ test('Time', () => {
   const d = new Date(2000, 2, 3, 4, 56)
   const actual = new HourlyWeather(d, null, null, null).time
   expect(actual).not.toBeNull()
-  if(actual === null) return
+  if (actual === null) return
   expect(actual.getFullYear()).toBe(2000)
-  expect(actual.getMonth()   ).toBe(2)
-  expect(actual.getDate()    ).toBe(3)
-  expect(actual.getHours()   ).toBe(4)
+  expect(actual.getMonth()).toBe(2)
+  expect(actual.getDate()).toBe(3)
+  expect(actual.getHours()).toBe(4)
 })
 
-
 describe('Icon', () => {
-  test.each([
-    ['Fine'],
-    [WeatherIcon.Fine]
-  ])('Fine', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Fine)
+  test('Fine', () => {
+    const hw = new HourlyWeather(null, 'Fine', null, null)
+    expect(hw.icon).toBe('Fine')
   })
 
-  test.each([
-    ['Cloud'],
-    [WeatherIcon.Cloud]
-  ])('Cloud', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Cloud)
+  test('Cloudy', () => {
+    const hw = new HourlyWeather(null, 'Cloudy', null, null)
+    expect(hw.icon).toBe('Cloudy')
   })
 
-  test.each([
-    ['Fog'],
-    [WeatherIcon.Fog]
-  ])('Fog', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Fog)
+  test('Foggy', () => {
+    const hw = new HourlyWeather(null, 'Foggy', null, null)
+    expect(hw.icon).toBe('Foggy')
   })
 
-  test.each([
-    ['Shower'],
-    [WeatherIcon.Shower]
-  ])('Shower', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Shower)
+  test('Drizzle', () => {
+    const hw = new HourlyWeather(null, 'Drizzle', null, null)
+    expect(hw.icon).toBe('Drizzle')
   })
 
-  test.each([
-    ['Rain'],
-    [WeatherIcon.Rain]
-  ])('Rain', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Rain)
+  test('FreezingDrizzle', () => {
+    const hw = new HourlyWeather(null, 'FreezingDrizzle', null, null)
+    expect(hw.icon).toBe('FreezingDrizzle')
   })
 
-  test.each([
-    ['Snow'],
-    [WeatherIcon.Snow]
-  ])('Snow', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Snow)
+  test('Rainy', () => {
+    const hw = new HourlyWeather(null, 'Rainy', null, null)
+    expect(hw.icon).toBe('Rainy')
   })
-  test.each([
-    ['DayShower'],
-    [WeatherIcon.DayShower]
-  ])('DayShower', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.DayShower)
+
+  test('FreezingRain', () => {
+    const hw = new HourlyWeather(null, 'FreezingRain', null, null)
+    expect(hw.icon).toBe('FreezingRain')
   })
-  test.each([
-    ['DaySnow'],
-    [WeatherIcon.DaySnow]
-  ])('DaySnow', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.DaySnow)
+
+  test('Snowy', () => {
+    const hw = new HourlyWeather(null, 'Snowy', null, null)
+    expect(hw.icon).toBe('Snowy')
   })
-  test.each([
-    ['Thunderstorm'],
-    [WeatherIcon.Thunderstorm]
-  ])('Thunderstorm', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.Thunderstorm)
+
+  test('RainShower', () => {
+    const hw = new HourlyWeather(null, 'RainShower', null, null)
+    expect(hw.icon).toBe('RainShower')
   })
-  test.each([
-    ['NA'],
-    [WeatherIcon.NA],
-    [null]
-  ])('NA', (val) => {
-    const hw = new HourlyWeather(null, val, null, null)
-    expect(hw.icon).toBe(WeatherIcon.NA)
+
+  test('SnowShower', () => {
+    const hw = new HourlyWeather(null, 'SnowShower', null, null)
+    expect(hw.icon).toBe('SnowShower')
+  })
+
+  test('Thunderstorm', () => {
+    const hw = new HourlyWeather(null, 'Thunderstorm', null, null)
+    expect(hw.icon).toBe('Thunderstorm')
+  })
+  test('NA', () => {
+    const hw = new HourlyWeather(null, 'NA', null, null)
+    expect(hw.icon).toBe('NA')
+  })
+
+  test('null', () => {
+    const hw = new HourlyWeather(null, null, null, null)
+    expect(hw.icon).toBe('NA')
   })
 })

@@ -1,157 +1,140 @@
-<!-- eslint-disable import/no-unresolved -->
-<!-- eslint-disable import/extensions -->
 <script lang="ts" setup>
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { WeatherIcon } from '../utils/Weather/WeatherIcon'
-import { HourlyWeather } from "../utils/Weather/HourlyWeather"
-import Fine from "~icons/wi/day-sunny"
-import Cloud from "~icons/wi/cloud"
-import Fog from "~icons/wi/fog"
-import Shower from "~icons/wi/showers"
-import Rain from "~icons/wi/rain"
-import Snow from "~icons/wi/snow"
-import DayShower from "~icons/wi/day-showers"
-import DaySnow from "~icons/wi/day-snow"
-import Thunderstorm from "~icons/wi/thunderstorm"
-import NA from "~icons/wi/na"
+import { HourlyWeather } from '../utils/Weather/HourlyWeather'
 
 export interface Props {
-  hourlyWeather?: HourlyWeather,
+  hourlyWeather?: HourlyWeather
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = withDefaults(defineProps<Props>(), {
-  hourlyWeather: () => new HourlyWeather(null, null, null, null)
+  hourlyWeather: () => new HourlyWeather(null, null, null, null),
 })
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getIconComponent = () => {
-  let ret
-  switch(WeatherIcon[props.hourlyWeather.icon]){
-    case 'Fine':
-      ret = Fine
-      break
-    case 'Cloud':
-      ret = Cloud
-      break
-    case 'Fog':
-      ret = Fog
-      break
-    case 'Shower':
-      ret = Shower
-      break
-    case 'Rain':
-      ret = Rain
-      break
-    case 'Snow':
-      ret = Snow
-      break
-    case 'DayShower':
-      ret = DayShower
-      break
-    case 'DaySnow':
-      ret = DaySnow
-      break
-    case 'Thunderstorm':
-      ret = Thunderstorm
-      break
-    default:
-      ret = NA
-  }
-  return ret
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getIconClass = ():string => {
-  if(props.hourlyWeather.icon === null) {return 'NA'}
-  return WeatherIcon[props.hourlyWeather.icon]
-}
 </script>
-
-<script lang="ts">
-export default {
-    components: {
-        Fine,
-        Cloud,
-        Fog,
-        Shower,
-        Rain,
-        Snow,
-        DayShower,
-        DaySnow,
-        Thunderstorm,
-        NA,
-    }
-}
-</script>
-
 
 <template lang="pug">
-.hourly_item
-  component.icon(:is='getIconComponent()' :class='getIconClass()')
-  .description
-    .temp
-      NA(v-if='hourlyWeather.temperture === null')
-      span(v-else) {{ hourlyWeather.temperture }}
-    .separator: span /
-    .chance_of_rain
-      NA(v-if='hourlyWeather.chance_of_rain === null')
-      span(v-else) {{ hourlyWeather.chance_of_rain }}
+#Tile-Inner-Wrapper
+  .hourly_item
+    v-icon.icon.Fine(
+      v-if="hourlyWeather.icon === 'Fine'" icon="mdi-weather-sunny")
+    v-icon.icon.Cloudy(
+      v-if="hourlyWeather.icon === 'Cloudy'" icon="mdi-weather-cloudy")
+    v-icon.icon.Foggy(
+      v-if="hourlyWeather.icon === 'Foggy'" icon="mdi-weather-fog")
+    v-icon.icon.Drizzle(
+      v-if="hourlyWeather.icon === 'Drizzle'" icon="mdi-weather-pouring")
+    v-icon.icon.FreezingDrizzle(
+      v-if="hourlyWeather.icon === 'FreezingDrizzle'"
+      icon="mdi-weather-pouring")
+    v-icon.icon.Rainy(
+      v-if="hourlyWeather.icon === 'Rainy'" icon="mdi-weather-rainy")
+    v-icon.icon.FreezingRain(
+      v-if="hourlyWeather.icon === 'FreezingRain'"
+      icon="mdi-weather-pouring")
+    v-icon.icon.Snowy(
+      v-if="hourlyWeather.icon === 'Snowy'" icon="mdi-weather-snowy")
+    v-icon.icon.RainShower(
+      v-if="hourlyWeather.icon === 'RainShower'"
+      icon="mdi-weather-partly-rainy")
+    v-icon.SnowShower(
+      v-if="hourlyWeather.icon === 'SnowShower'"
+      icon="mdi-weather-partly-snowy")
+    v-icon.icon.Thunderstorm(
+      v-if="hourlyWeather.icon === 'Thunderstorm'"
+      icon="mdi-lightning-bolt-outline")
+    v-icon.icon.NA(v-if="hourlyWeather.icon === 'NA'" icon="mdi-close")
+    .description
+      .temp
+        v-icon(v-if='hourlyWeather.temperture === null' icon="mdi-close")
+        span(v-else) {{ hourlyWeather.temperture.toFixed(1) }}
+      .separator: span /
+      .chance_of_rain
+        v-icon(v-if='hourlyWeather.chanceOfRain === null' icon="mdi-close")
+        span(v-else) {{ hourlyWeather.chanceOfRain.toFixed(0) }}
 </template>
 
-
 <style lang="scss" scoped>
+// TODO: アイコンを中央寄せ
+// TODO: アイコンを選び直し
 $item_size: 48px;
 $icon_height: 30px;
 $text_size: 5pt;
 $separator_size: 8pt;
 
-.hourly_item{
-    width: $item_size;
-    height: $item_size;
+.hourly_item {
+  width: $item_size;
+  height: $item_size;
+  display: flex;
+  flex-direction: column;
+
+  .icon {
+    height: $icon_height;
+    &.Fine {
+      color: red;
+    }
+    &.Cloudy {
+      color: gray;
+    }
+    &.Foggy {
+      color: cadetblue;
+    }
+    &.Drizzle {
+      color: cadetblue;
+    }
+    &.FreezingDrizzle {
+      color: cadetblue;
+    }
+    &.Rainy {
+      color: cadetblue;
+    }
+    &.FreezingRain {
+      color: cadetblue;
+    }
+    &.Snowy {
+      color: cadetblue;
+    }
+    &.RainShower {
+      color: cadetblue;
+    }
+    &.SnowShower {
+      color: cadetblue;
+    }
+    &.Thunderstorm {
+      color: rgb(210, 210, 0);
+    }
+    &.NA {
+      color: darkslategray;
+    }
+  }
+  .description {
+    flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    text-justify: center;
+    text-align: center;
 
-    .icon{
-        height: $icon_height;
-        &.Fine{color:red;}
-        &.Cloud {color:gray;}
-        &.Fog {color:cadetblue;}
-        &.Shower {color:cadetblue;}
-        &.Rain {color:cadetblue;}
-        &.Snow {color:cadetblue;}
-        &.DayShower {color:cadetblue;}
-        &.DaySnow {color:cadetblue;}
-        &.Thunderstorm {color:gray;}
-        &.NA {color:darkslategray;}
+    .temp,
+    .chance_of_rain,
+    .separator {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      span {
+        width: 100%;
+      }
     }
-    .description{
-        flex-grow: 1;
-        display: flex;
-        text-justify: center;
-        text-align: center;
-
-        .temp, .chance_of_rain, .separator{
-            display: flex;
-            align-items: center;
-            text-align: center;
-            span{
-                width: 100%;
-            }
-        }
-        .temp, .chance_of_rain{
-            flex-grow: 1;
-            justify-content: center;
-            align-items: center;
-            font-size: $text_size;
-        }
-        .separator{
-            font-size: $separator_size;
-        }
-        .temp>span::after{
-            content: "℃";
-        }
-        .chance_of_rain>span::after{
-            content: "%";
-        }
+    .temp,
+    .chance_of_rain {
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+      font-size: $text_size;
     }
+    .separator {
+      font-size: $separator_size;
+    }
+    .temp > span::after {
+      content: '℃';
+    }
+    .chance_of_rain > span::after {
+      content: '%';
+    }
+  }
 }
 </style>
