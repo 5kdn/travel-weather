@@ -3,6 +3,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import Icons from 'unplugin-icons/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +16,18 @@ export default defineConfig({
       autoImport: true,
       styles: {
         configFile: 'src/styles/settings.scss',
+      },
+    }),
+    Icons({
+      compiler: 'vue3',
+      autoInstall: true,
+      iconCustomizer(collection, icon, props) {
+        if (collection === 'wi') {
+          // eslint-disable-next-line no-param-reassign
+          props.width = '100%'
+          // eslint-disable-next-line no-param-reassign
+          props.height = '100%'
+        }
       },
     }),
     ViteFonts({
@@ -39,4 +52,4 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-});
+})

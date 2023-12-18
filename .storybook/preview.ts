@@ -2,12 +2,16 @@ import { setup } from '@storybook/vue3'
 import { registerPlugins } from '../src/plugins'
 
 import type { Preview } from '@storybook/vue3'
+import { createPinia } from 'pinia'
 
 // Plugins
 import { withVuetifyTheme } from './withVuetifyTheme.decorator'
 
+const pinia = createPinia()
+
 setup((app) => {
   // Registers your app's plugins into Storybook
+  app.use(pinia)
   registerPlugins(app)
 })
 

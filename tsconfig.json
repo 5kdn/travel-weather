@@ -9,9 +9,10 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": false,
+    "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "lib": ["esnext", "dom"],
     "types": [
       "node",
@@ -19,7 +20,8 @@
       "vitest/globals"
     ],
     "paths": {
-      "@/*": ["src/*"]
+        "@/*": ["src/*"],
+        "vuedraggable": ["src/types/vuedraggable"],
     },
   },
   "include": [
@@ -28,5 +30,10 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts"
-  ]
+  ],
+  "vueCompilerOptions": {
+    "plugins": [
+        "@vue/language-plugin-pug"
+    ],
+  }
 }

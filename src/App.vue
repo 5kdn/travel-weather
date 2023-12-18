@@ -1,7 +1,9 @@
-<template>
-  <router-view />
+<template lang="pug">
+router-view/
 </template>
 
-<script lang="ts" setup>
-//
+<script lang="ts">
+import 'destyle.css'
+
+export default {}
 </script>
