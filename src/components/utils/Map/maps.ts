@@ -7,7 +7,9 @@ import { Coordinate } from '../coordinate'
  * @param {Array<google.maps.MarkerOptions>} markerOptions 対象の座標群
  * @returns {*}  {google.maps.LatLng} 中心座標
  */
-export function calcCenterPoint(places: Array<Coordinate | null>): Coordinate {
+export const calcCenterPoint = (
+  places: Array<Coordinate | null>,
+): Coordinate => {
   if (places.length === 0) return new Coordinate(39.65471648, 138.00118571)
   const pointA = new Coordinate(-90.0, -179.0)
   const pointB = new Coordinate(90.0, 180.0)
@@ -32,7 +34,7 @@ export function calcCenterPoint(places: Array<Coordinate | null>): Coordinate {
  * @param {Array<google.maps.MarkerOptions>} markerOptions 対象の座標群
  * @returns {*}  {number} zoom level
  */
-export function calcZoomlevel(places: Array<Coordinate | null>): number {
+export const calcZoomlevel = (places: Array<Coordinate | null>): number => {
   // 座標が0個の場合は日本全体を表示
   if (places.length === 0) return 4.7
   // 座標が1個の場合は固定値
@@ -66,4 +68,38 @@ export function calcZoomlevel(places: Array<Coordinate | null>): number {
 
   const zoomLevel = 15.2 - 1.44 * Math.log(distance)
   return zoomLevel
+}
+
+/** 地点名を取得する */
+export const getPlaceName = async (
+  coordinate: Coordinate,
+): Promise<string | undefined> => {
+  let name: string | undefined
+  const geocoder = new google.maps.Geocoder()
+  const LatLng = new google.maps.LatLng(coordinate.lat, coordinate.lng)
+  geocoder
+    .geocode({ location: LatLng })
+    .then(response => {
+      if (response.results[0]) {
+        const res = response.results[0]
+        if (res.address_components.length <= 2) return undefined
+
+        let name = ''
+        res.address_components
+          .reverse()
+          .slice(1, res.address_components.length - 1)
+          .forEach(element => {
+            name += element.short_name
+          })
+        return name
+      }
+      // eslint-disable-next-line no-console
+      console.log('No result found')
+      return undefined
+    })
+    .catch(e => {
+      // eslint-disable-next-line no-console
+      console.error('Geocoder failed due to:', e)
+    })
+  return name
 }

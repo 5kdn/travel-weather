@@ -14,7 +14,10 @@ const toggleReduction = (): void => {
 }
 
 const addPlaces = (place: Place) => {
-  places.value.push(place)
+  // places.value.push(place)
+  const {coordinate} = place
+  if (coordinate == null) return
+  store.push(coordinate.lat, coordinate.lng)
 }
 </script>
 
